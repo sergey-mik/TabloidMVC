@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TabloidMVC.Models.UserProfile>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container pt-5">
+<h1>Index</h1>
+
+<p>
+    <a asp-action="InactiveIndex">See All Deactivated Users</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisplayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType.Name)
+                </td>
+                <td>
+                    @if (item.UserTypeId != 3 && item.UserTypeId != 4)
+                    {
+
+                        @Html.ActionLink("Deactivate |", "Deactivate", new { id = item.Id });
+
+                    }
+                    @if (item.UserTypeId != 1 && item.UserTypeId != 2)
+                    {
+
+                        @Html.ActionLink("Activate |", "Activate", new { id = item.Id });
+
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+
+                </td>
+                    </tr>
+         }
+    </tbody>
+</table>
+</div>

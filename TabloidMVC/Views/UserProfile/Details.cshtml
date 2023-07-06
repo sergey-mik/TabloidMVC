@@ -1,0 +1,43 @@
+﻿@model TabloidMVC.Models.UserProfile
+
+@{
+    ViewData["Title"] = $"{Model.FullName}'s Profile";
+}
+
+<div class="container pt-5">
+    <div class="userProfile">
+        <section class="px-3">
+            <div class="row justify-content-between">
+                <h1 class="text-secondary">@Model.FullName</h1>
+                <h1 class="text-black-50">@Model.UserType.Name</h1>
+            </div>
+            <div class="row">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary mx-1" title="Edit">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-primary mx-1" title="Delete">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+        </section>
+        <hr />
+        @if (!string.IsNullOrWhiteSpace(Model.ImageLocation))
+        {
+            <section class="row justify-content-center">
+                <div>
+                    <img src="@Model.ImageLocation" />
+                </div>
+            </section>
+        }
+        <section class="row post__content">
+            <p class="col-sm-12 mt-5"> Display Name: @Html.DisplayFor(model => model.DisplayName)</p>
+        </section>
+        <section class="row post__content">
+            <p class="col-sm-12 mt-5"> Email: @Html.DisplayFor(model => model.Email)</p>
+        </section>
+        <section class="row post__content">
+            <p class="col-sm-12 mt-5"> Profile Created: @Html.DisplayFor(model => model.CreateDateTime)</p>
+        </section>
+
+    </div>
+</div>
